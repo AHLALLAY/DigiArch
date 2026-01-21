@@ -11,7 +11,7 @@ async function bootstrap() {
     credentials: configService.get('app.cors.credentials'),
   });
 
-  const port = configService.get('app.port');
+  const port = configService.get('app.port') || 3000;
 
   await app.listen(port);
   console.log(`${configService.get('app.name')} is running on: http://localhost:${port}`);

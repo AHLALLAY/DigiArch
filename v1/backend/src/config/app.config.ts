@@ -7,7 +7,7 @@ export default registerAs('app', () => ({
     nodeEnv: process.env.NODE_ENV,
     cors: {
         origin: process.env.CORS_ORIGIN,
-        credentials: process.env.CORS_CREDENTIALS,
+        credentials: process.env.CORS_CREDENTIALS === 'true',
     },
     maxFileSize: parseInt(process.env.MAX_FILE_SIZE || '10485760'),
     admin: {

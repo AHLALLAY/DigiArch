@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import appConfig from './config/app.config';
@@ -13,6 +14,13 @@ import minioConfig from './config/minio.config';
       isGlobal: true,
       envFilePath: '.env',
       load: [appConfig, databaseConfig, jwtConfig, minioConfig]
+    }),
+    MongooseModule.forRootAsync({
+      imports:[ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get('database.uri'),
+      }),
+      inject:[ConfigService]
     }),
   ],
   controllers: [AppController],

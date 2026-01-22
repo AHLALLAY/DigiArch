@@ -7,6 +7,7 @@ import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import jwtConfig from './config/jwt.config';
 import minioConfig from './config/minio.config';
+import { UserModule } from './modules/users/user.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import minioConfig from './config/minio.config';
       }),
       inject:[ConfigService]
     }),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
